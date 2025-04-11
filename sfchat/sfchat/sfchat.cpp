@@ -1,6 +1,10 @@
 #include <chrono>
 #include <ctime>
+#include <iostream>
+#include <fstream>
 #include "sfchat.h"
+
+using namespace std;
 
 User_Account::User_Account()
 {
@@ -58,4 +62,129 @@ string getCurrentTime()
 	current_time = time_buffer;
 	
 	return current_time;
+}
+
+bool isUserExist(string value)
+{
+	fstream users;
+	string current_fstring{};
+
+	users.open("users.txt");
+	if (!users.is_open())
+	{
+		cerr << "Error while opening file." << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	while (getline(users, current_fstring))
+	{
+		if (current_fstring == value)
+		{
+			users.close();
+			return true;
+		}
+	}
+	users.close();
+	return false;
+}
+
+bool authProcess(unique_ptr<User_Account>& ua_name)
+{
+	string login{};
+	string password{};
+	string name{};
+	string current_fstring{};
+	char answer{};
+	fstream users;
+
+	cout << "Welcome to SFChat!" << endl << "(1) Create a account" << endl << "(2) Login to your account" << endl << "(3) Exit" << endl << "Your answer?: ";
+	cin >> answer;
+
+	cout << "\033[2J\033[1;1H";
+
+	switch (answer)
+	{
+	case '1':
+	{
+		do
+		{
+			cout << "Enter your login: ";
+			getline(cin >> ws, login);
+			if (isUserExist(login))
+			{
+				cout << "This name is already taken" << endl;
+			};
+		} while (isUserExist(login));
+
+		cout << "Enter your password: ";
+		getline(cin >> ws, password);
+		cout << "Enter your name: ";
+		getline(cin >> ws, name);
+
+		ua_name->setUser_login(login);
+		ua_name->setUser_password(password);
+		ua_name->setUser_name(name);
+
+		users.open("users.txt", ios::app); //open with writing from the end
+		if (!users.is_open())
+		{
+			cerr << "Error while opening file." << endl;
+			exit(EXIT_FAILURE);
+		}
+		users << login << endl << password << endl << name << endl;
+		users.close();
+		return 1;
+
+		break;
+	}
+	case '2':
+	{
+		cout << "Enter your login: ";
+		getline(cin >> ws, login);
+
+		users.open("users.txt");
+		if (!users.is_open())
+		{
+			cerr << "Error while opening file." << endl;
+			exit(EXIT_FAILURE);
+		}
+
+		while (users >> current_fstring)
+		{
+			if (current_fstring == login)
+			{
+				cout << "Enter your password: ";
+				getline(cin >> ws, password);
+				users.ignore();
+				getline(users, current_fstring);
+				if (current_fstring == password)
+				{
+					cout << "Successful authorization" << endl;
+
+					ua_name->setUser_login(login);
+					ua_name->setUser_password(password);
+					getline(users, current_fstring);
+					ua_name->setUser_name(current_fstring);
+
+					break;
+				}
+				else
+				{
+					cout << "Incorrect password" << endl;
+				}
+
+			}
+		}
+		users.close();
+		return 1;
+
+		break;
+	}
+	case '3':
+		exit(0);
+
+	default:
+		return 0;
+		break;
+	}
 }

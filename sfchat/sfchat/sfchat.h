@@ -26,3 +26,7 @@ public:
 };
 
 string getCurrentTime();
+
+bool isUserExist(string);
+
+bool authProcess(unique_ptr<User_Account>& ua_name);

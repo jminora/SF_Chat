@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\sfchat\\SF_Chat\\sfchat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|solutionrelative:sfchat\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\sfchat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|solutionrelative:sfchat\\sfchat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\sfchat.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|solutionrelative:sfchat\\sfchat.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\sfchat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|solutionrelative:sfchat\\sfchat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C230EA4D-76DF-46B9-834B-93448B3FEC8C}|sfchat\\sfchat.vcxproj|solutionrelative:sfchat\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,17 +22,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\main.cpp",
               "RelativeDocumentMoniker": "sfchat\\main.cpp",
               "ToolTip": "C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\main.cpp",
               "RelativeToolTip": "sfchat\\main.cpp",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAEwHMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIMAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-28T17:43:09.362Z",
               "IsPinned": true,
@@ -46,7 +46,7 @@
               "RelativeDocumentMoniker": "sfchat\\sfchat.h",
               "ToolTip": "C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\sfchat.h",
               "RelativeToolTip": "sfchat\\sfchat.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-04T20:38:57.193Z",
               "IsPinned": true,
@@ -54,13 +54,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "sfchat.cpp",
               "DocumentMoniker": "C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\sfchat.cpp",
               "RelativeDocumentMoniker": "sfchat\\sfchat.cpp",
               "ToolTip": "C:\\sfchat\\SF_Chat\\sfchat\\sfchat\\sfchat.cpp",
               "RelativeToolTip": "sfchat\\sfchat.cpp",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-04T20:40:15.724Z",
               "IsPinned": true,

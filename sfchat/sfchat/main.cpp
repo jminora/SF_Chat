@@ -2,106 +2,36 @@
 #include <fstream>
 #include "sfchat.h"
 
-using namespace std;
-
 int main()
 {
 	bool working{ true };
-	int answer{};
+	char answer{};
+	string user_post{};
+	string current_fstring{};
+	string pm_name{};
+	string keyword1{};
+	string keyword2{};
 	fstream chat;
-	fstream users;
+	fstream pchat;
 	unique_ptr<User_Account> userAccount(new User_Account());
-	string login{};
-	string password{};
-	string name{};
 
-	cout << "Welcome to SFChat! (1) Create a account; (2) Login to account; (3) Exit. Your answer?: ";
-	cin >> answer;
-	switch (answer)
+	while (!authProcess(userAccount))
 	{
-	case 1:
-	{
-		cout << "Enter your login: ";
-		getline(cin >> ws, login);
-		cout << "Enter your password: ";
-		getline(cin >> ws, password);
-		cout << "Enter your name: ";
-		getline(cin >> ws, name);
-
-		userAccount->setUser_login(login);
-		userAccount->setUser_password(password);
-		userAccount->setUser_name(name);
-
-		users.open("users.txt", ios::app); //open with writing from the end
-		if (!users.is_open())
-		{
-			cerr << "Error while opening file." << endl;
-			exit(EXIT_FAILURE);
-		}
-		users << login << endl << password << endl << name << endl;
-		users.close();
-
-		break;
-	}
-	case 2:
-	{
-		string current_fstring;
-
-		cout << "Enter your login: ";
-		getline(cin >> ws, login);
-
-		users.open("users.txt");
-		if (!users.is_open())
-		{
-			cerr << "Error while opening file." << endl;
-			exit(EXIT_FAILURE);
-		}
-
-		while (users >> current_fstring)
-		{
-			if (current_fstring == login)
-			{
-				cout << "Enter your password: ";
-				getline(cin >> ws, password);
-				users.ignore();
-				getline(users, current_fstring);
-				if (current_fstring == password)
-				{
-					cout << "Successful authorization" << endl;
-					
-					userAccount->setUser_login(login);
-					userAccount->setUser_password(password);
-					getline(users, current_fstring);
-					userAccount->setUser_name(current_fstring);
-				}
-				else
-				{
-					cout << "Incorrect password" << endl;
-				}
-
-			}
-		}
-		users.close();
-
-		break;
-	}
-	case 3:
-		return 0;
-
-	default:
-		cout << "Error. Try again" << endl;
-	}
-
+		authProcess(userAccount);
+	};
+		
 	cout << "\033[2J\033[1;1H";
 
 	while (working)
 	{
-		cout << "Hi, " << userAccount->getUser_name() << "! What you want to do?: (1) Read a chat; (2) Write to a chat; (3) Exit. Your answer?:  ";
+		cout << "Hi, " << userAccount->getUser_name() << "! What you want to do?: " << endl << "(1) Read a general chat" << endl << "(2) Write to a general chat" << endl << "(3) Read PM from a user" << endl << "(4) PM to a specific user" << endl << "(5) Log out" << endl << "(6) Exit" << endl << "Your answer?:  ";
 		cin >> answer;
+
+		cout << "\033[2J\033[1;1H";
 
 		switch (answer)
 		{
-		case 1:
+		case '1':
 		{
 			//read from a chat
 			chat.open("chat.txt");
@@ -120,10 +50,9 @@ int main()
 			break;
 		}
 
-		case 2:
+		case '2':
 		{
 			//write to a chat
-			string user_post{};
 			chat.open("chat.txt", ios::app); //open with writing from the end
 			if (!chat.is_open())
 			{
@@ -138,20 +67,79 @@ int main()
 			break;
 		}
 
-		case 3:
+		case '3':
+		{
+			do
+			{
+				cout << "Enter name of the user you want to read a PM from: ";
+				getline(cin >> ws, pm_name);
+				if (!isUserExist(pm_name))
+				{
+					cout << "This user does not exist" << endl;
+				};
+			} while (!isUserExist(pm_name));
+
+			keyword1 = "From " + pm_name + " to " + userAccount->getUser_name();
+			keyword2 = "From " + userAccount->getUser_name() + " to " + pm_name;
+			pchat.open("pchat.txt");
+			if (!pchat.is_open())
+			{
+				cerr << "Error while opening file." << endl;
+				exit(EXIT_FAILURE);
+			}
+			while (getline(pchat, current_fstring)) {
+				if ((current_fstring.find(keyword1) != string::npos) || (current_fstring.find(keyword2) != string::npos)) {
+					cout << current_fstring << endl;
+				}
+			}
+			pchat.close();
+			cout << endl << "Press Enter to continue.." << endl;
+			cin.get();
+			cout << "\033[2J\033[1;1H";
+			break;
+		}
+
+		case '4':
+		{
+			do
+			{
+				cout << "Enter name of the user you want to send a PM to: ";
+				getline(cin >> ws, pm_name);
+				if (!isUserExist(pm_name))
+				{
+					cout << "This user does not exist" << endl;
+				};
+			} while (!isUserExist(pm_name));
+
+			pchat.open("pchat.txt", ios::app);
+			if (!pchat.is_open())
+			{
+				cerr << "Error while opening file." << endl;
+				exit(EXIT_FAILURE);
+			}
+			getline(cin >> ws, user_post);
+			pchat << "[" << getCurrentTime() << "] " << "From " << userAccount->getUser_name() << " to " << pm_name << ": " << user_post << endl;
+			pchat.close();
+			cout << "\033[2J\033[1;1H";
+			break;
+		}
+
+		case '5':
+			while (!authProcess(userAccount))
+			{
+				authProcess(userAccount);
+			};
+			cout << "\033[2J\033[1;1H";
+			break;
+
+
+		case '6':
 			working = false;
 			break;
 
 		default:
 			cout << "Error. Try again" << endl;
-			//working = false;
-
-
-
-			//commands for clear a screen
-			//system("cls"); //windows
-			//system("clear"); //linux
-			//cout << "\033[2J\033[1;1H"; // ANSI escape sequence
+			break;
 		}
 	}
 	return 0;
